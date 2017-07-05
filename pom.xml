@@ -13,6 +13,18 @@
     <version>1.5.4.RELEASE</version>
   </parent>
 
+  <properties>
+    <!-- ========================= -->
+    <!-- PLUGIN Specific PROPERTIES -->
+    <!-- ========================= -->
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <!-- ========================= -->
+    <!-- PLUGIN VERSION PROPERTIES -->
+    <!-- ========================= -->
+    <version.compiler.plugin>3.5.1</version.compiler.plugin>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
   <licenses>
     <license>
       <name>Apache License, Version 2.0</name>
@@ -35,10 +47,6 @@
   </scm>
 
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
-
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -57,7 +65,7 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-data-jpa</artifactId>
     </dependency>
-    
+
     <dependency>
       <groupId>com.h2database</groupId>
       <artifactId>h2</artifactId>
@@ -71,16 +79,36 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-data-couchbase</artifactId>
     </dependency>
-    
+
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
     </dependency>
-    
+
     <dependency>
-        <groupId>junit</groupId>
-        <artifactId>junit</artifactId>
-      </dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+    </dependency>
   </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <fork>true</fork>
+          <maxmem>${compiler.xmx}</maxmem>
+          <meminitial>${compiler.xms}</meminitial>
+          <source>${maven.compiler.source}</source>
+          <target>${maven.compiler.target}</target>
+          <compilerArgument>${additionalparam}</compilerArgument>
+          <encoding>${project.build.sourceEncoding}</encoding>
+          <showWarnings>true</showWarnings>
+          <showDeprecation>true</showDeprecation>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>

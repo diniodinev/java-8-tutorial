@@ -24,9 +24,9 @@ public class Main {
                 URL urlPath = new URL(url);
                 String relativeFile = urlPath.getPath().substring(0, urlPath.getPath().lastIndexOf('/'));
                 System.out.println(
-                        "src/main/resources/" + relativeFile + FilenameUtils.getName(url).replaceAll("%20", ""));
+                        "src/main/resources/" + relativeFile +"/"+ FilenameUtils.getName(url).replaceAll("%20", ""));
                 FileUtils.copyURLToFile(new URL(url), new File(
-                        "src/main/resources/" + relativeFile + FilenameUtils.getName(url).replaceAll("%20", "")), 10000,
+                        "src/main/resources/" + relativeFile +"/"+ FilenameUtils.getName(url).replaceAll("%20", "")), 10000,
                         10000);
             } catch (MalformedURLException e) {
                 e.printStackTrace();

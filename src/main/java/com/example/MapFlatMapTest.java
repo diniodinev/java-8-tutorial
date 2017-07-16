@@ -1,13 +1,7 @@
 package com.example;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-
 import java.util.Arrays;
 import java.util.List;
-
-import javax.print.StreamPrintServiceFactory;
-
-import java.util.stream.*;
 
 public class MapFlatMapTest {
     public static void main(String[] args) {

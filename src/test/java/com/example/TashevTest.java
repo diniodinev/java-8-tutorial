@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import com.example.tashev.images.Main;
 
-public class Tashev {
+public class TashevTest {
 
     @Test
     public void testMain() throws IOException {

@@ -14,7 +14,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         Download tashev = new Download();
-        List<String> allFiles = tashev.traverse(Arrays.asList(Download.baseUrlFiles));
+        List<String> allFiles = tashev.traverse(Arrays.asList(Download.baseUrlImages));
 
         allFiles.parallelStream().forEach(url -> {
             try {

@@ -14,7 +14,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         Download tashev = new Download();
-        List<String> allFiles = tashev.traverse(Arrays.asList(Download.baseUrlImages));
+        List<String> allFiles = tashev.traverse(Arrays.asList(Download.baseUrlFiles));
 
         allFiles.parallelStream().forEach(url -> {
             try {
@@ -25,6 +25,10 @@ public class Main {
                 String relativeFile = urlPath.getPath().substring(0, urlPath.getPath().lastIndexOf('/'));
              //   System.out.println(
               //          "src/main/resources/" + relativeFile +"/"+ FilenameUtils.getName(url).replaceAll("%20", ""));
+				File resourceDir = new File("src/main/resources/" + relativeFile);
+				if (resourceDir.exists() && FileUtils.sizeOfDirectory(resourceDir) > 256*FileUtils.ONE_MB) {
+					FileUtils.deleteDirectory((new File("src/main/resources/" + relativeFile)));
+				}
                 System.out.println(FilenameUtils.getName(url).replaceAll("%20", ""));
                 FileUtils.copyURLToFile(new URL(url), new File(
                         "src/main/resources/" + relativeFile +"/"+ FilenameUtils.getName(url).replaceAll("%20", "")), 10000,

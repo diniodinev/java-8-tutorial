@@ -24,7 +24,7 @@ import org.jsoup.nodes.Element;
 public class Download {
 
     private static Log logger = LogFactory.getLog(Download.class);
-    
+
     final static String baseUrlImages = "http://www.tashev-galving.com/images/";
     final static String baseUrlFiles = "http://www.tashev-galving.com/files/";
     final static String baseUrlSrv = "http://tashev-galving.com/srv/";
@@ -32,14 +32,18 @@ public class Download {
 
     final static String extensionSearchedForDownload = ".";
 
-    public Document dowloadResource(String url) throws IOException {
+    public static Document dowloadResource(String url) {
         if (isValidUlr(url)) {
-            return Jsoup.connect(url).get();
+            try {
+                return Jsoup.connect(url).get();
+            } catch (IOException e) {
+                logger.debug(e);
+            }
         }
         return null;
     }
 
-    public boolean isValidUlr(String urlForCheck) {
+    public static boolean isValidUlr(String urlForCheck) {
         try {
             if (!urlForCheck.startsWith("http")) {
                 return false;
@@ -81,11 +85,7 @@ public class Download {
             fileExtansionToCheck = ".jpg";
         }
         Document basePage = null;
-        try {
-            basePage = dowloadResource(baseUrlForChecking);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        basePage = dowloadResource(baseUrlForChecking);
 
         Predicate<Element> containsExtension = element -> element.text().contains(extensionSearchedForDownload);
         Predicate<Element> endsWIthSlash = element -> element.text().endsWith("/");
@@ -121,15 +121,23 @@ public class Download {
         });
     }
 
+    public void downloadFile(String urlOfFileTODOwnload) {
+
+    }
+
     private void saveFileToDisk(Entry<String, List<String>> entry) {
         entry.getValue().parallelStream().forEach(url -> {
             try {
-                FileUtils.copyURLToFile(new URL(url), new File(mainResourceDir + entry.getKey(),
-                        FilenameUtils.getName(url).replaceAll("%20", "")), 10000, 10000);
+                saveFile(entry.getKey(), url);
             } catch (IOException e) {
                 logger.debug(e);
             }
         });
+    }
+
+    public static void saveFile(String url, String identity) throws IOException {
+        FileUtils.copyURLToFile(new URL(url),
+                new File(mainResourceDir + identity, FilenameUtils.getName(url).replaceAll("%20", "")), 10000, 10000);
     }
 
     private void cleanIfFull(String endingPath, long size) {

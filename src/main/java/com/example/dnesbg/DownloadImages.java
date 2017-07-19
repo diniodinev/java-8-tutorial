@@ -15,8 +15,9 @@ public class DownloadImages {
 
     private static Log logger = LogFactory.getLog(Download.class);
 
-    final static String baseUrlImages = "http://85.14.28.164/d/images/photos/0347/0000";
-    final static String suffix = "-article2.jpg";
+   // final static String baseUrlImages = "http://85.14.28.164/d/images/photos/0347/0000";
+    final static String baseUrlImages = " http://85.14.28.164/d/images/slideshows/00000";
+      final static String suffix = "-middle.jpg";
     // http://85.14.28.164/d/images/photos/0347/0000347608-article2.jpg
 
     public void downloadImages(int from, int to) {

@@ -26,8 +26,9 @@ public class DownloadImages {
         IntStream.rangeClosed(from, to).parallel().forEach(i -> {
             try {
                 Download.saveFile(baseUrlImages + i + suffix, "");
+                logger.trace(baseUrlImages + i + suffix);
             } catch (IOException e) {
-                logger.debug(e);
+                //logger.debug(e);
             }
         });
 

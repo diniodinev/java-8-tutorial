@@ -15,7 +15,7 @@ public class Main {
         // tashev.download(allFiles);
 
         DownloadImages dnesBgCollect = new DownloadImages();
-        dnesBgCollect.downloadImages(80826, 347607);
+        dnesBgCollect.downloadImages(60525, 80826);
     }
 
 }
